@@ -360,10 +360,6 @@
         <div class="form-container">
             <h2 class="form-title">Select Your Plan</h2>
             
-            <!-- 
-                action="#" prevents sending data to a server.
-                onsubmit="processOrder(event)" handles the logic in JavaScript.
-            -->
             <form id="orderForm" action="#" method="POST" onsubmit="processOrder(event)">
                 
                 <!-- Full Name -->
@@ -376,6 +372,12 @@
                 <div class="input-group">
                     <label for="email">Your Email</label>
                     <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                </div>
+
+                <!-- Phone Number (NEW) -->
+                <div class="input-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+251 911..." required>
                 </div>
 
                 <!-- Instagram Username (REQUIRED) -->
@@ -464,6 +466,7 @@
             
             const name = document.getElementById('fullname').value;
             const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value; // Get Phone Number
             let username = usernameInput.value.trim();
             const packageValue = document.querySelector('input[name="followers"]:checked').value;
 
@@ -505,12 +508,11 @@
             // %0D%0A is the standard code for a new line in email bodies
             const recipient = "pedu0817@gmail.com";
             const subject = "New Order - JOSEPH";
-            const body = `New Order Details:%0D%0A%0D%0AName: ${name}%0D%0AEmail: ${email}%0D%0AInstagram: ${username}%0D%0APackage: ${packageValue} Followers%0D%0APrice: ${price}`;
+            const body = `New Order Details:%0D%0A%0D%0AName: ${name}%0D%0AEmail: ${email}%0D%0APhone: ${phone}%0D%0AInstagram: ${username}%0D%0APackage: ${packageValue} Followers%0D%0APrice: ${price}`;
 
             const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${body}`;
 
-            // 7. Execute the link
-            // This is the REAL way to open the mail client without fake elements
+            // 7. Execute the link (REAL mailto)
             window.location.href = mailtoLink;
         }
 
